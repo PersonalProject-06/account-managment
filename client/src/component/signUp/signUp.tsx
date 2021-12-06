@@ -7,9 +7,7 @@ import {
   checkName,
   ifMatch,
 } from "../../helpres/helper";
-import emailjs from 'emailjs-com';
-
-
+import emailjs from "emailjs-com";
 
 export const SignUp = () => {
   const [name, setName] = useState("");
@@ -52,16 +50,16 @@ export const SignUp = () => {
     }
     return;
   };
- // const sendEmail = (e:any) => {
+  // const sendEmail = (e:any) => {
   //  e.preventDefault();
-  
-   // emailjs.sendForm('gmail', 'service_4q99ppt', e.target, 'user_CMcAz2kHOK0om1nlGILgm')
+
+  // emailjs.sendForm('gmail', 'service_4q99ppt', e.target, 'user_CMcAz2kHOK0om1nlGILgm')
   //    .then((result) => {
-   //       console.log(result.text);
-   //   }, (error) => {
-    //      console.log(error.text);
-    //  });
-   // }
+  //       console.log(result.text);
+  //   }, (error) => {
+  //      console.log(error.text);
+  //  });
+  // }
   return (
     <section className="vh-100" style={{ backgroundColor: "#6a11cb" }}>
       <div className="container h-100 ">
@@ -166,8 +164,7 @@ export const SignUp = () => {
                         <button
                           className="btn btn-outline-light btn-lg px-5 ml-10"
                           onClick={(e) => {
-                            checkCredentials()
-                         
+                            checkCredentials();
                           }}
                         >
                           Login
@@ -175,7 +172,6 @@ export const SignUp = () => {
                       </div>
                     </div>
                   </div>
-                  
                 </div>
               </div>
             </div>
