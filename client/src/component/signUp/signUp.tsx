@@ -7,6 +7,8 @@ import {
   checkName,
   ifMatch,
 } from "../../helpres/helper";
+import emailjs from "emailjs-com";
+
 export const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,6 +19,8 @@ export const SignUp = () => {
   const [invalidPassword, setInvalidPassword] = useState(false);
   const [notMatch, setnotMatch] = useState(false);
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
+  console.log(error);
+  console.log(data);
   const checkCredentials = (): void => {
     if (!checkEmail(email)) {
       setInvalidEmail(true);
@@ -46,7 +50,16 @@ export const SignUp = () => {
     }
     return;
   };
+  // const sendEmail = (e:any) => {
+  //  e.preventDefault();
 
+  // emailjs.sendForm('gmail', 'service_4q99ppt', e.target, 'user_CMcAz2kHOK0om1nlGILgm')
+  //    .then((result) => {
+  //       console.log(result.text);
+  //   }, (error) => {
+  //      console.log(error.text);
+  //  });
+  // }
   return (
     <section className="vh-100" style={{ backgroundColor: "#6a11cb" }}>
       <div className="container h-100 ">
@@ -150,7 +163,7 @@ export const SignUp = () => {
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
                           className="btn btn-outline-light btn-lg px-5 ml-10"
-                          onClick={() => {
+                          onClick={(e) => {
                             checkCredentials();
                           }}
                         >
@@ -158,13 +171,6 @@ export const SignUp = () => {
                         </button>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                    <img
-                      src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/draw1.png"
-                      className="img-fluid"
-                      alt=""
-                    />
                   </div>
                 </div>
               </div>
