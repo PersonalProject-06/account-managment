@@ -7,7 +7,7 @@ export const checkEmail = (email: string): boolean => {
   }
   return false;
 };
-
+//
 export const checkName = (name: string): boolean => {
   if (typeof name === "string" && name.includes("<script>") === false) {
     return true;
