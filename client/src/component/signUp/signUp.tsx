@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { CREATE_USER } from "../graphql/Mutation";
 import { useMutation } from "@apollo/client";
+import Spinner from 'react-bootstrap/Spinner'
 import {
   checkEmail,
   checkPassword,
   checkName,
   ifMatch,
 } from "../../helpres/helper";
-import emailjs from "emailjs-com";
+import Model from "../model/model"
+
+
 
 export const SignUp = () => {
   const [name, setName] = useState("");
@@ -18,12 +21,30 @@ export const SignUp = () => {
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
   const [notMatch, setnotMatch] = useState(false);
+  const [model , setModel] =useState(false);
+  const [spinner,setSpinner] =useState(false)
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
-  console.log(error);
-  console.log(data);
+
+  const state =()=>{
+    if(loading) {
+      setSpinner(true);
+      
+    }
+   else if( data ){
+      console.log(data);
+      setSpinner(false)
+      setModel(true);
+    }
+   else if(error){
+      setSpinner(false)
+      setModel(false);
+    }
+  }
+
+    
   const checkCredentials = (): void => {
     if (!checkEmail(email)) {
-      setInvalidEmail(true);
+      setInvalidEmail(true)
     }
     if (!checkPassword(password)) {
       setInvalidPassword(true);
@@ -50,17 +71,10 @@ export const SignUp = () => {
     }
     return;
   };
-  // const sendEmail = (e:any) => {
-  //  e.preventDefault();
 
-  // emailjs.sendForm('gmail', 'service_4q99ppt', e.target, 'user_CMcAz2kHOK0om1nlGILgm')
-  //    .then((result) => {
-  //       console.log(result.text);
-  //   }, (error) => {
-  //      console.log(error.text);
-  //  });
-  // }
   return (
+    <>
+    <Model  model={model} setModel={setModel}/>
     <section className="vh-100" style={{ backgroundColor: "#6a11cb" }}>
       <div className="container h-100 ">
         <div className="row d-flex justify-content-center align-items-center h-100 ">
@@ -165,9 +179,12 @@ export const SignUp = () => {
                           className="btn btn-outline-light btn-lg px-5 ml-10"
                           onClick={(e) => {
                             checkCredentials();
+                            state()
                           }}
                         >
-                          Login
+                          {spinner?  <Spinner animation="border" variant="light" />:"Login"}
+                           
+                           
                         </button>
                       </div>
                     </div>
@@ -179,5 +196,6 @@ export const SignUp = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
